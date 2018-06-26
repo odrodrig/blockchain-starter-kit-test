@@ -43,6 +43,12 @@ function deploy_composer_contract {
     BUSINESS_NETWORK_VERSION=$(jq --raw-output '.version' package.json)
     BUSINESS_NETWORK_ARCHIVES=$(ls dist/*.bna)
     BUSINESS_NETWORK_CARD=admin@${BUSINESS_NETWORK_NAME}
+
+    ls
+    composer card list
+    composer card import -f ./admin@vehicle-manufacture-network.card
+    composer card list
+    
     for BUSINESS_NETWORK_ARCHIVE in ${BUSINESS_NETWORK_ARCHIVES}
     do
         if ! OUTPUT=$(composer network install -c ${BLOCKCHAIN_NETWORK_CARD} -a ${BUSINESS_NETWORK_ARCHIVES} 2>&1)
